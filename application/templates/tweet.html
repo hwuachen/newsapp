@@ -1,0 +1,49 @@
+    {% extends "layout.html" %}
+    
+    {% block content %}
+    <h1>Trump Tweets</h1>
+
+    <!--  Display the Term and Year here --->
+    <h3>Term: {{year}} Total Count = {{total}}</h3>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">source</th>
+                <th scope="col">id_str</th>
+                <th scope="col">text</th>
+                <th scope="col">created_at</th>
+                <th scope="col">retweet_count</th>
+                <th scope="col">favorite_count</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- Construct the rest of tweets here -->
+            {% for data in dataList %}
+            <tr>
+                <td scope='row'>{{ data["source"] }}</td>
+                <td>{{ data["id_str"] }}</td>
+                <td>{{ data["text"] }}</td>
+                <td>{{ data["created_at"] }}</td>
+                <td>{{ data["retweet_count"] }}</td>
+                 <td>{{ data["favorite_count"] }}</td>
+                <td>
+                    <form action="{{url_for('view')}}" method="POST">
+                        <input type="hidden" name="source" value="{{data['source']}}">
+                        <input type="hidden" name="id_str" value="{{data['id_str']}}">
+                        <input type="hidden" name="created_at" value="{{data['text']}}">
+                        <input type="hidden" name="retweet_count" value="{{data['text']}}">
+                        <input type="hidden" name="favorite_count" value="{{data['text']}}">
+                        <button>View</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

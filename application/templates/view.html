@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Wou are viewing</h1>
+
+            <p>source: {{data.source}} </p>
+            <p>id_str: {{data.id_str}} </p>
+            <p>text: {{data.text}} </p>
+            <p>created_at: {{data.created_at}} </p>
+            <p>retweet_count: {{data.retweet_count}} </p>
+            <p>in_reply_to_user_id_str: {{data.in_reply_to_user_id_str}} </p>
+            <p>favorite_count: {{data.favorite_count}} </p>
+            <p>is_retweet: {{data.is_retweet}} </p>
+            
+        </div>
+    </div>
+{% endblock %}
