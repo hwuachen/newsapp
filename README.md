@@ -4,7 +4,7 @@ https://www.python.org/downloads/
 >python -v
 >py 
 ## pip - Python package manager
->pip -- version
+>pip --version
 if not installed, follow https://pip.pypa.io/en/stable/installing/
 >pip list
 >pip install or uninstall
@@ -59,7 +59,7 @@ https://stackoverflow.com/questions/5712857/pymongo-vs-mongoengine-for-django
 	db.<collection>.insertMany({...})
 - insert JSON file /data directly using mongoimport.exe via commandline
 	mongoimport --db <DB> --collection <collection> --file <file>
-	mongoimport --d <DB> -c <collection> --file <file>     //with shortcut
+	mongoimport --d <DB> -c <collection> --file <file>  --jsonArray    //with shortcut
 
 #### Git 
 Git:  git --version
