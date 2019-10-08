@@ -50,6 +50,11 @@ solved by --jsonArray
 #### why pymongo vs mongoengine
 https://stackoverflow.com/questions/5712857/pymongo-vs-mongoengine-for-django
 
+#### Flask-WTF 
+-Flask-WTF is an extension for the WTForms library
+-WTForms provided a clean way to generate HTML form fields.
+- Maintain separate code and presentation similar to MVC view and controller pattern
+
 <MonggoDB> 
 - create collections to store documents (data)
 - insert documents into collections
@@ -78,3 +83,6 @@ Click “I” to edit.
 > git  add .
 > git commit -m “message to comment”
 > git push https://github.com/hwuachen/git-trump-tweets.git
+
+#### Tips: 
+1. to comment : ctl + '/' 

@@ -1,7 +1,8 @@
 from application import app, db
-from flask import render_template, request, json, Response
+from flask import render_template, request, json, Response, redirect, flash
 from trumptweets_testdata import trumpTweetsTestData
 from application.models import User, Trumptweet
+from application.forms import LoginForm, RegisterForm
 
 trumpTweets = Trumptweet.objects.all()
 
@@ -25,14 +26,49 @@ def tweets(year="2018"):
     return render_template("tweet.html", dataList=trumpTweets, tweet=True, year=year, total=len(trumpTweets))
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET','POST'])
 def login():
-    return render_template("login.html", login=True)
+    form = LoginForm()
+    if form.validate_on_submit():
+        # if request.form.get("email") == "test@credit-suisse.com":
+        #     print ("email: =", request.form.get("email") )
+        #     # flask message will only set on time on browser. Net to set common in layout 
+        #     flash("You are successfully logged in!", "success")
+        email       = form.email.data
+        password    = form.password.data        
+        user = User.objects(email=email).first()
+
+        print('email =', email)
+        print('password =', password)
+        print('user.password =', user.password)            
+
+        #if user and password == user.password:
+        if user and user.get_password(password):
+            flash(f"{user.first_name}, you are successfully logged in!", "success")
+            return redirect("/index")
+        else:
+            flash("Sorry, something went wrong.","danger")
+    return render_template("login.html", title="Login", form=form, login=True )
 
 
-@app.route("/register")
+@app.route("/register", methods=['POST','GET'])
 def register():
-    return render_template("register.html", register=True)
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user_id     = User.objects.count()
+        user_id     += 1
+
+        email       = form.email.data
+        password    = form.password.data
+        first_name  = form.first_name.data
+        last_name   = form.last_name.data
+
+        user = User(user_id=user_id, email=email, first_name=first_name, last_name=last_name)
+        user.set_password(password)
+        user.save()
+        flash("You are successfully registered!","success")
+        return redirect(url_for('index'))
+    return render_template("register.html", title="Register", form=form, register=True)
 
 
 @app.route("/view", methods=["GET", "POST"])
@@ -71,6 +107,7 @@ def user():
     '''     
     users = User.objects.all()
     print('user count = ', len(users))
+    
     return render_template("user.html", users=users)
 
 @app.route("/news")
