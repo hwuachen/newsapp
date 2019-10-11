@@ -86,3 +86,12 @@ Click “I” to edit.
 
 #### Tips: 
 1. to comment : ctl + '/' 
+
+# Another workaround would be to just install spaCy from conda instead. This will ship with wheels and doesn't require you to compile spaCy locally:
+conda install -c conda-forge spacy
+
+pip install moduleName
+python3 -m pip install moduleName
+pip install --upgrade flask-socketio
+
+https://chatbotslife.com/how-i-developed-my-own-learning-chatbot-in-python-from-scratch-and-deployed-it-on-facebook-88bc828be0a8
