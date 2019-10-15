@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, english_bot
 from flask import render_template, request, json, Response, redirect, flash
 from trumptweets_testdata import trumpTweetsTestData
 from application.models import User, Trumptweet
@@ -13,10 +13,18 @@ def getDataItem(id, data):
 
 @app.route("/")
 @app.route("/index")
-@app.route("/home")
 def index():
     return render_template("index.html", index=True)
 
+@app.route("/chat")
+def chat():
+    return render_template("chat.html", chat=True)
+
+@app.route("/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    bot_response = str(english_bot.get_response(userText))
+    return bot_response
 
 @app.route("/tweets/")
 @app.route("/tweets/<year>")
